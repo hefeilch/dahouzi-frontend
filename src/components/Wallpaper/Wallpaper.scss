@@ -1,0 +1,8 @@
+@import "../../static/scss/common";
+
+.app-content .app-wallpaper {
+  background-image:  url('../../static/images/bg-img-default-1920x1080.jpg');
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}

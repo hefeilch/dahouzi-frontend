@@ -1,8 +1,10 @@
 /**
  * Created by CH on 2017/6/10.
  */
+const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const baseConfig = require('./webpack.config.base.js');
+const baseConfig = require('./base.js');
+const path = require('path');
 
 module.exports = function(env) {
     return webpackMerge(baseConfig, {
@@ -15,7 +17,8 @@ module.exports = function(env) {
 
         plugins: [
             new webpack.DefinePlugin({
-                'process.env.NODE_ENV': JSON.stringify('production')
+                'process.env.NODE_ENV': JSON.stringify('production'),
+                '__DEV__': false
             }),
             new webpack.LoaderOptionsPlugin({
                 minimize: true,

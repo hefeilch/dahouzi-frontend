@@ -1,0 +1,22 @@
+@import "variables";
+@import "normalize";
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.app-wrap {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.app-content {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+}

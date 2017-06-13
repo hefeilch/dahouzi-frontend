@@ -1,21 +1,25 @@
 /**
  * Created by CH on 2017/6/10.
  */
-const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
+let outputPath = '../public';
+let publicPath = '/'
 
 module.exports = {
     target: 'web',
     devtool: 'cheap-module-source-map',
     entry: {
         index: './src/entry/index',
-        about: './src/entry/about',
-        error: './src/entry/error',
-        admin: './src/entry/admin'
+        // about: './src/entry/about',
+        // error: './src/entry/error',
+        // admin: './src/entry/admin'
     },
     output: {
         filename: '[name].[hash].js',
-        path: path.join(__dirname, '/public/assets'),
+        path: path.join(__dirname, outputPath),
         publicPath: publicPath
     },
     resolve: {
@@ -37,14 +41,13 @@ module.exports = {
                 loader: 'json-loader',
             },
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 use: [{
                     loader: "style-loader", // creates style nodes from JS strings
                     options: { sourceMap: true }
                 }, {
                     loader: "css-loader", // translates CSS into CommonJS
                     options: {
-                        importLoaders: 1,
                         sourceMap: true
                     }
                 }, {
@@ -71,7 +74,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: '大猴子',
-            template: './src/index.ejs'
+            template: './src/page/index.ejs'
         })
     ]
 }

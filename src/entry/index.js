@@ -1,32 +1,42 @@
+import 'babel-polyfill'
 import React from 'react'
-import { render } from 'react-dom'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import { AppContainer } from 'react-hot-loader'
+import { AppContainer as AppHotLoader } from 'react-hot-loader'
+import configStore from '../store/configStore'
+import AppContainer from '../containers/AppContainer'
 
-import App from './containers/App'
+const initialState = window.___INITIAL_STATE__
+const store = configStore(initialState)
 
-let store = createStore(todoApp)
+let render = (Component) => {
 
-render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
-)
-
-const render = Component => {
     ReactDOM.render(
-        <AppContainer>
-            <Component />
-        </AppContainer>,
+        <Component store={store} />,
+        document.getElementById('root')
+    )
+}
+let hotRender = (Component) => {
+    ReactDOM.render(
+        <AppHotLoader>
+            <Component store={store} />
+        </AppHotLoader>,
         document.getElementById('root')
     )
 }
 
-render(App)
-
-if (module.hot) {
-    module.hot.accept('./containers/App', () => { render(App) })
+if (__DEV__) {
+    if (window.devToolsExtension) {
+        window.devToolsExtension.open()
+    }
 }
+
+if (__DEV__) {
+    if (module.hot) {
+        module.hot.accept('../containers/AppContainer', () => hotRender(AppContainer))
+    }
+    hotRender(AppContainer)
+}else {
+    render(AppContainer)
+}
+
+
