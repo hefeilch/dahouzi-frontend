@@ -1,2 +1,32 @@
 @import "../../static/scss/common";
 
+.header-wrap {
+  height: 60px;
+  position: relative;
+  width: 100%;
+
+}
+
+.header-content {
+  height: 100%;
+  width: 100%;
+  .add-action {
+    color: #FFFFFF;
+    float: right;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    text-decoration: none;
+    width: 60px;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  &:after {
+    content: '';
+    clear: both;
+    height: 0px;
+  }
+}

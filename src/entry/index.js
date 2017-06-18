@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import { AppContainer as AppHotLoader } from 'react-hot-loader'
 import configStore from '../store/configStore'
 import AppContainer from '../containers/AppContainer'
@@ -11,14 +12,18 @@ const store = configStore(initialState)
 let render = (Component) => {
 
     ReactDOM.render(
-        <Component store={store} />,
+        <Provider store={store}>
+            <Component />
+        </Provider>,
         document.getElementById('root')
     )
 }
 let hotRender = (Component) => {
     ReactDOM.render(
         <AppHotLoader>
-            <Component store={store} />
+            <Provider store={store}>
+                <Component />
+            </Provider>
         </AppHotLoader>,
         document.getElementById('root')
     )

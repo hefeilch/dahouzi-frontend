@@ -3,6 +3,9 @@
  */
 import { combineReducers } from 'redux'
 
+import { contextMenuReducer } from './ContextMenuReducer'
+import { addLinkReducer } from './AddLinkReducer'
+
 const test = (state = {}, action)=> {
     switch(action.type){
         case 'TEST':
@@ -15,6 +18,8 @@ const test = (state = {}, action)=> {
 }
 
 const rootReducer = combineReducers({
+    contextMenu: contextMenuReducer,
+    addLink: addLinkReducer,
     test: test
 })
 

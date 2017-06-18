@@ -3,15 +3,40 @@
  */
 import React , { Component }from 'react'
 import PropTypes from 'prop-types'
-import './Layout.scss'
+import { connect } from 'react-redux'
+import './Header.scss'
+import { showAddLinkModalAction } from '../../actions/AddLinkAction'
 
-class Layout extends Component {
+
+
+class Header extends Component {
+
+    onClick(){
+        this.props.showAddLinkModal();
+    }
     render(){
         return (
-            <div className="app-content">
+            <div className="header-wrap">
+                <div className="header-content">
+                    <a className="add-action" href="javascript:void(0);" onClick={ this.onClick.bind(this) }>ADD</a>
+                </div>
             </div>
         )
     }
 }
 
-export default Layout
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showAddLinkModal(){
+            dispatch(showAddLinkModalAction());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
