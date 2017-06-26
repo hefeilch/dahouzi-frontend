@@ -4,6 +4,7 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const baseConfig = require('./base.js');
+const config = require('./config');
 const path = require('path');
 
 module.exports = function(env) {
@@ -18,7 +19,9 @@ module.exports = function(env) {
         plugins: [
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify('production'),
-                '__DEV__': false
+                '__DEV__': false,
+                '__MOCKED__': false,
+                '__REQUEST_PATH__': JSON.stringify(config.REQUEST_PATH_PROD)
             }),
             new webpack.LoaderOptionsPlugin({
                 minimize: true,

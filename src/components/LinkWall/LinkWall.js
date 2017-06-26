@@ -4,40 +4,28 @@
 import React , { Component }from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { showContextMenuAction, hideContextMenuAction } from '../../actions/ContextMenuAction'
+import { fetchLinkListAction } from '../../actions/FetchLinkAction'
 import './LinkWall.scss'
 
 class LinkWall extends Component {
 
-    onContextMenu(e){
-        this.props.onContextMenu(e)
+    componentDidMount(){
+        this.props.fetchLinkList();
     }
-
-    componentDidMount(){}
 
     render(){
 
-        const LinkListItem = ()=> {
-            return (
-                <li className="link-list-item">
-                    <a className="link-action" href="http://wwww.tmall.com/" target="blank" onContextMenu={this.onContextMenu.bind(this)}>上天猫，就够了</a>
-                </li>
-            )
-        }
+        const LinkList = this.props.linkListData.map((item) =>
+            <li className="link-list-item" key={item.id}>
+                <a className="link-action" href={item.linkValue} target="blank" >{item.linkName}</a>
+            </li>
+        )
 
         return (
             <div className="link-wall-wrap" >
                 <div className="link-wall-content">
                     <ul className="link-list">
-                        <LinkListItem/>
-                        <LinkListItem/>
-                        <LinkListItem/>
-                        <LinkListItem/>
-                        <LinkListItem/>
-                        <LinkListItem/>
-                        <LinkListItem/>
-                        <LinkListItem/>
-                        <LinkListItem/>
+                        {LinkList}
                     </ul>
                 </div>
 
@@ -47,16 +35,21 @@ class LinkWall extends Component {
 }
 
 const mapStateToProps = (state) => {
+    let linkListDataById = state.linkList.byIds;
+    let linkListData = [];
+    console.log(linkListDataById)
+    for(let p in linkListDataById){
+        linkListData.push(linkListDataById[p])
+    }
     return {
-
+        linkListData: linkListData
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onContextMenu: (e) => {
-            console.log('右键了a' + e.target)
-            // dispatch(showContextMenuAction({posX: e.pageX, posY: e.pageY}))
+        fetchLinkList: () => {
+            dispatch(fetchLinkListAction())
         }
     }
 }

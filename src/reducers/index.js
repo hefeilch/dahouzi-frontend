@@ -5,6 +5,7 @@ import { combineReducers } from 'redux'
 
 import { contextMenuReducer } from './ContextMenuReducer'
 import { addLinkReducer } from './AddLinkReducer'
+import { fetchLinkListReducer } from './FetchLinkListReducer'
 
 const test = (state = {}, action)=> {
     switch(action.type){
@@ -20,6 +21,7 @@ const test = (state = {}, action)=> {
 const rootReducer = combineReducers({
     contextMenu: contextMenuReducer,
     addLink: addLinkReducer,
+    linkList: fetchLinkListReducer,
     test: test
 })
 

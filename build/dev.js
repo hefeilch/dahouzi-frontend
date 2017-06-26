@@ -4,6 +4,7 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const baseConfig = require('./base.js');
+const config = require('./config');
 const path = require('path');
 
 let outputPath = '../public';
@@ -27,7 +28,9 @@ module.exports = function() {
             // new webpack.NamedModulesPlugin(),
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify('development'),
-                '__DEV__': true
+                '__DEV__': true,
+                '__MOCKED__': true,
+                '__REQUEST_PATH__': JSON.stringify(config.REQUEST_PATH_DEV)
             }),
 
         ],
